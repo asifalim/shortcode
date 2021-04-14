@@ -16,8 +16,8 @@ vector<int>prime;
 void sieve()
 {
     vis[1]=1;
-    for(int i=2;i*i<mxN;i++)
-    if(!vis[i]){prime.push_back(i);for(int j=i*i;j<mxN;j+=i)vis[j]=1;}
+    for(int i=2;i*i<mxN;i++)if(!vis[i])for(int j=i*i;j<mxN;j+=i)vis[j]=1;
+    for(i=2;i<mxN;i++)if(!vis[i])prime.push_back(i);
 }
 signed main()
 {
