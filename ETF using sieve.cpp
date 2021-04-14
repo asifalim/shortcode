@@ -5,8 +5,13 @@ const int mxN=1e6+2;
 int phi[mxN];
 void ETF()
 {
-    for(int i=1; i<mxN; i++)phi[i]=i-1;phi[1]=1;
-    for(int i=2; i<mxN; i++)for(int j=i*2;j<mxN;j+=i)phi[j]-=phi[i];
+    for(int i=2; i<mxN; i++)phi[i]=i;
+    for(int i =2; i<mxN; i++)
+        if(phi[i]==i)
+        {
+            for(int j=i; j<mxN; j+=i)
+                phi[j]-=phi[j]/i;
+        }
 }
 int main()
 {
