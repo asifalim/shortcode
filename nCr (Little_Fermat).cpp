@@ -28,6 +28,18 @@ void facto()
     if(~dp[n][r])return dp[n][r];
     return dp[n][r]=ncr(n-1,r)+ncr(n-1,r-1);
 }*/
+//2D array
+
+/*ll ncr[1010][1010];
+void prencr()
+{
+     ncr[1][0]=ncr[1][1]=1;
+     for(int i=2;i<mxn;i++)
+     {
+         ncr[i][i]=ncr[i][0]=1;
+         for(int j=1;j<i;j++)ncr[i][j]=ncr[i-1][j-1]+ncr[i-1][j],ncr[i][j];
+     }
+}*/
 
 ll ncr(int n,int r)
 {
