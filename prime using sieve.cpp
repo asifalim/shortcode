@@ -10,14 +10,14 @@ using namespace std;
 #define kill(a) {cout<<a<<endl;continue;}
 #define pi  2 * acos(0.0)
 int t,ans=0,tot=0,k=0;
-const int mxN=1e7,mod=1e9+7;
+const int mxn=1e7,mod=1e9+7;
 bool vis[mxN];
 vector<int>prime;
 void sieve()
 {
     vis[1]=1;
-    for(int i=2;i*i<mxN;i++)if(!vis[i])for(int j=i*i;j<mxN;j+=i)vis[j]=1;
-    for(i=2;i<mxN;i++)if(!vis[i])prime.push_back(i);    //may be better to use array instead of vector for time efficient.
+    for(int i=2;i*i<mxn;i++)if(!vis[i])for(int j=i*i;j<mxn;j+=i)vis[j]=1;
+    for(int i=2;i<mxn;i++)if(!vis[i])prime.push_back(i);    //may be better to use array instead of vector for time efficient.
 }
 signed main()
 {
