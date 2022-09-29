@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long int
-const int mxN=1e6+4,mod=1e9+7;
-ll fact[mxN],inv[mxN];
+const int mxn=1e6+4,mod=1e9+7;
+ll fact[mxn],inv[mxn];
 ll power(ll base,ll p)
 {
     ll res=1;
@@ -16,8 +16,8 @@ ll power(ll base,ll p)
 void facto()
 {
     fact[0]=1;
-    for(int i=1;i<mxN;i++)fact[i]=(fact[i-1]*i)%mod;
-  //for(int i=1;i<mxN;i++)inv[i]=power(fact[i],mod-2);
+    for(int i=1;i<mxn;i++)fact[i]=(fact[i-1]*i)%mod;
+  //for(int i=1;i<mxn;i++)inv[i]=power(fact[i],mod-2);
 }
 //Recursion:-- 
 
