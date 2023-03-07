@@ -13,63 +13,37 @@ using namespace std;
 #define endl "\n"
 #define INF (1LL<<61)
 int t,cs=0;
-const int mxn=1e6+3,mod=1e9+7;
-const int mod1=1e9+7,mod2=1e9+9;
-const int base1=131,base2=237;
-int ip1,ip2;
-pair<int64_t,int64_t>pw[mxn],ipw[mxn];
-int64_t power(int64_t base,int64_t po,int64_t md)
+const int mxn=1e6+3,mod1=1e9+7,mod2=1e9+9;
+const int base1=131,base2=277;
+int64_t pw1[mxn],hs1[mxn],hs2[mxn],pw2[mxn];
+int64_t power(int64_t base,int64_t po,int64_t mod)
 {
     int64_t res=1;
     while(po)
     {
-        if(po&1)res*=base,res%=md;
-        base*=base,base%=md,po/=2;
+        if(po&1)res*=base,res%=mod;
+        po/=2,base*=base,base%=mod;
     }
     return res;
 }
 void getpower()
 {
-    pw[0]= {1,1};
-    for(int i=1; i<mxn; i++)
-    {
-        pw[i].first=1LL*pw[i-1].first*base1%mod1;
-        pw[i].second=1LL*pw[i-1].second*base2%mod2;
-    }
-    ip1=power(base1,mod1-2,mod1),ip2=power(base2,mod2-2,mod2);
-    ipw[0]= {1,1};
-    for(int i=1; i<mxn; i++)
-    {
-        ipw[i].first=1LL*ipw[i-1].first*ip1%mod1;
-        ipw[i].second=1LL*ipw[i-1].second*ip2%mod2;
-    }
+    pw1[0]=1,pw2[0]=1;
+    for(int i=1;i<mxn;i++)pw1[i]=pw1[i-1]*base1%mod1,pw2[i]=pw2[i-1]*base2%mod2;
 }
-struct Hashing
+void gethash(string &s)
 {
-    int n;
-    vector<pair<int,int>>hs;
-    Hashing(string s)
-    {
-        n=s.size();
-        hs.push_back({1,1});
-        for(int i=0; i<n; i++)
-        {
-            pair<int,int>p;
-            p.first=(hs[i].first+1LL*pw[i].first*s[i]%mod1)%mod1;
-            p.second=(hs[i].second+1LL*pw[i].second*s[i]%mod2)%mod2;
-            hs.push_back(p);
-        }
-    }
-    pair<int64_t,int64_t>gethash(int l,int r)
-    {
-        if(l>r)return {0,0};
-        assert(l>=1 and r<=n and l<=r);
-        pair<int,int>ans;
-        ans.first=(hs[r].first-hs[l-1].first+mod1)*1LL*ipw[l-1].first%mod1;
-        ans.second=(hs[r].second-hs[l-1].second+mod2)*1LL*ipw[l-1].second%mod2;
-        return ans;
-    }
-};
+    hs1[0]=hs2[0]=s[0];
+    for(int i=1;i<(int)s.size();i++)hs1[i]=(hs1[i-1]*base1+s[i])%mod1,hs2[i]=(hs2[i-1]*base2+s[i])%mod2;
+}
+pair<int64_t,int64_t>rangehash(int l,int r)
+{
+    if(r<l)return {0,0};
+    if(!l)return {hs1[r],hs2[r]};
+    int64_t a=(hs1[r]-(hs1[l-1]*pw1[r-l+1])%mod1+mod1)%mod1;
+    int64_t b=(hs2[r]-(hs2[l-1]*pw2[r-l+1])%mod2+mod2)%mod2;
+    return {a,b};
+}
 signed main()
 {
     getpower();
@@ -79,7 +53,7 @@ signed main()
         cin>>n;
         string s;
         cin>>s;
-        Hashing h(s);
-        cout<<h.gethash(1,n).first<<" "<<h.gethash(1,n).second<<endl;
+        gethash(s);
+        cout<<rangehash(0,n-1).first<<" "<<rangethash(0,n-1).second<<endl;
     }
 }
