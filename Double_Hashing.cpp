@@ -54,6 +54,6 @@ signed main()
         string s;
         cin>>s;
         gethash(s);
-        cout<<rangehash(0,n-1).first<<" "<<rangethash(0,n-1).second<<endl;
+        cout<<rangehash(0,n-1).first<<" "<<rangehash(0,n-1).second<<endl;
     }
 }
