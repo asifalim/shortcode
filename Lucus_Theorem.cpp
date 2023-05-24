@@ -53,7 +53,7 @@ int lucus(int64_t n,int64_t r,int md)
     if(r>n)return 0;
     vector<int>N=run(n,md),R=run(r,md);
     int sz=R.size();
-    int ans=1;
+    int64_t ans=1;
     for(int i=0; i<sz; i++)ans=1LL*ans*ncr(N[i],R[i],md)%md;
     return ans;
 }
@@ -67,6 +67,6 @@ int32_t main()
         int p;
         cin>>n>>k>>p;
         fac(p);
-        cout<<solve(n,k,p)<<endl;
+        cout<<lucus(n,k,p)<<endl;
     }
 }
