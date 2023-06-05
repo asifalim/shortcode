@@ -21,7 +21,7 @@ void refresh()
 }
 int find(int n)
 {
-    return par[n]==n?n:find(par[n]);
+    return par[n]==n?n:par[n]=find(par[n]);
 }
 void merge(int a,int b)
 {
