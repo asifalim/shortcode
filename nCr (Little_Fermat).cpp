@@ -19,6 +19,14 @@ void facto()
     for(int i=1;i<mxn;i++)fact[i]=(fact[i-1]*i)%mod;
   //for(int i=1;i<mxn;i++)inv[i]=power(fact[i],mod-2);
 }
+ll ncr(int n,int r)
+{
+    if(n<r)return 0;
+    ll res=fact[n];
+    res=(res*power(fact[n-r],mod-2))%mod;
+    res=(res*power(fact[r],mod-2))%mod;
+    return res;
+}
 //Recursion:-- 
 
 /*ll ncr(int n,int r)
@@ -41,17 +49,9 @@ void prencr()
      }
 }*/
 
-ll ncr(int n,int r)
-{
-    facto();
-    if(n<r)return 0;
-    ll res=fact[n];
-    res=(res*power(fact[n-r],mod-2))%mod;
-    res=(res*power(fact[r],mod-2))%mod;
-    return res;
-}
 int main()
 {
+    facto();
     int t;
     cin>>t;
     while(t--)
