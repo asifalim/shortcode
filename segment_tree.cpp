@@ -12,42 +12,42 @@ using namespace std;
 #define pi  2 * acos(0.0)
 #define lcm(a, b) (a/__gcd(a,b))*b
 int t,ans=0,tot=0;
-const int mxn=1e5+1,mod=1e9+7;
-ll tree[mxn*4];
-void build(int st,int ed,int node)
+const int mxn = 1e5+1,mod = 1e9 + 7;
+int64_t tree[mxn * 4];
+int ar[mxn];
+void build(int st, int ed, int node)
 {
-    if(st==ed)return void(tree[node]=ar[st]);      //set node value
-    int mid=(st+ed)>>1;
-    build(st,mid,node*2);
-    build(mid+1,ed,node*2+1);
-    tree[node]=tree[node*2]+tree[node*2+1];       //logic here
+    if(st == ed)return void(tree[node] = ar[st]);
+    int mid = st + ed >> 1;
+    build(st, mid, node * 2);
+    build(mid + 1, ed, node * 2 + 1);
+    tree[node] = tree[node * 2] + tree[node * 2 + 1];
 }
-void update(int st,int ed,int l,int val,int node)
+void update(int st, int ed, int node, int idx, int val)
 {
-    if(st>l or ed<l)return;
-    if(st==ed)return void(tree[node]=ar[val]);    //update node value
-    int mid=(st+ed)>>1;
-    update(st,mid,l,val,node*2);
-    update(mid+1,ed,l,val,node*2+1);
-    tree[node]=tree[node*2]+tree[node*2+1];       //logic here
+    if(st > idx or ed < idx)return;
+    if(st == ed)return void(tree[node] = val);
+    int mid = st+ed >> 1;
+    update(st, mid, node * 2, idx, val);
+    update(mid + 1, ed, node * 2 + 1, idx, val);
+    tree[node] = tree[node * 2] + tree[node * 2 + 1];
 }
-ll query(int st,int ed,int l,int r,int node)
+int64_t query(int st, int ed, int node, int l, int r)
 {
-    if(st>r or ed<l)return 0;
-    if(st>=l and ed<=r)return tree[node];         //return desire value
-    int mid=(st+ed)>>1;
-    return query(st,mid,l,r,node*2)+query(mid+1,ed,l,r,node*2+1);       //logic here
+    if(st > r or ed < l)return 0;
+    if(st >= l and ed <= r)return tree[node];
+    int mid = st + ed >> 1;
+    return query(st, mid, node * 2, l, r) + query(mid + 1, ed, node * 2 + 1, l, r);
 }
 signed main()
 {
     //fast;
     //w(t)
    // {
-        int n,m,a,b,c,d,e,i,j,k,sm=0,sm1=0,cn=0,cn1=0,mx=-1e9,mn=1e9;
-        string s,sr,sa,ss;
-        bool f=false,ff=false;
-        cin>>n;
-        build(1,n,1);
+        int n;
+        cin >> n;
+        for(int i = 1; i <= n; i++)cin >> ar[i];
+        build(1, n, 1);
 
     //}
 }
