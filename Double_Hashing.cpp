@@ -16,16 +16,6 @@ int t,cs=0;
 const int mxn=1e6+3,mod1=1e9+7,mod2=1e9+9;
 const int base1=131,base2=277;
 int64_t pw1[mxn],hs1[mxn],hs2[mxn],pw2[mxn];
-int64_t power(int64_t base,int64_t po,int64_t mod)
-{
-    int64_t res=1;
-    while(po)
-    {
-        if(po&1)res*=base,res%=mod;
-        po/=2,base*=base,base%=mod;
-    }
-    return res;
-}
 void getpower()
 {
     pw1[0]=1,pw2[0]=1;
